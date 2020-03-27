@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: gateway-server
+  profiles:
+    active: host_route
+  redis:
+    host: 192.168.26.128
+    port: 6379
+    database: 0
+
+server:
+  port: 8200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+---
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+      - id: service-consumer
+        uri: lb://SERVICE-CONSUMER
+        predicates:
+        - Path=/api/consumer/**
+        filters:
+        - StripPrefix=1
+      - id: service-producer
+        uri: lb://SERVICE-PRODUCER
+        predicates:
+        - Path=/api/producer/**
+        filters:
+        - StripPrefix=1
+  profiles: default
+
+---
+spring:
+  application:
+    name: gateway-server
+  cloud:
+    gateway:
+      routes:
+      - id: service-consumer
+        uri: lb://SERVICE-CONSUMER
+        predicates:
+        - Path=/api/consumer/**
+        filters:
+        - StripPrefix=1
+        - name: RequestRateLimiter
+          args:
+            #用于限流的键的解析器的 Bean 对象的名字。它使用 SpEL 表达式根据#{@beanName}从 Spring 容器中获取 Bean 对象。
+            key-resolver: '#{@hostaddrKeyResolver}'
+            #令牌桶每秒填充平均速率
+            redis-rate-limiter.replenishRate: 2
+            #令牌桶总容量。
+            redis-rate-limiter.burstCapacity: 10
+      - id: service-producer
+        uri: lb://SERVICE-PRODUCER
+        predicates:
+        - Path=/api/producer/**
+        filters:
+        - StripPrefix=1
+  profiles: host_route
