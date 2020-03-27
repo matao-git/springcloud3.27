@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-consul" />
+        <module name="eureka-server" />
+        <module name="eureka-client" />
+        <module name="service-consumer" />
+        <module name="zuul-server" />
+        <module name="hystrix-dashboard" />
+        <module name="ssss" />
+        <module name="service-producer" />
+        <module name="gateway-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="client" target="1.8" />
+      <module name="day-producer" target="1.8" />
+      <module name="dayconsumer" target="1.8" />
+      <module name="demo" target="1.8" />
+      <module name="server-demo" target="1.8" />
+      <module name="ssss" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="client" options="-parameters" />
+      <module name="day-producer" options="-parameters" />
+      <module name="dayconsumer" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="eureka-client" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="gateway-server" options="-parameters" />
+      <module name="hystrix-dashboard" options="-parameters" />
+      <module name="server-demo" options="-parameters" />
+      <module name="service-consumer" options="-parameters" />
+      <module name="service-producer" options="-parameters" />
+      <module name="spring-consul" options="-parameters" />
+      <module name="workspeace-springcloud" options="-parameters" />
+      <module name="zuul-server" options="-parameters" />
+    </option>
+  </component>
+</project>
